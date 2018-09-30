@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 public class Mower {
     private static final String EMPTY = "";
+    private static final String SPACE = " ";
     private static final String OUTPUT_FORMAT = "%s %s";
     private Position position;
     private Orientation orientation;
@@ -52,10 +53,10 @@ public class Mower {
 
     public String move(){
      //   commands.forEach(command -> command.getDirectionManager().move(this));
-        StringBuffer logs = commands.stream().map(command -> command.getDirectionManager().move(this))
+        String logs = commands.stream().map(command -> command.getDirectionManager().move(this))
                 .map(Object::toString)
-                .reduce(new StringBuffer(), StringBuffer::append, StringBuffer::append);
-        System.out.println(logs.toString());
+                .collect(Collectors.joining(SPACE));
+        System.out.println(logs);
         return this.toString();
     }
 
