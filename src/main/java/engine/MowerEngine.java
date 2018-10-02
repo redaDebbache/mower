@@ -2,6 +2,7 @@ package engine;
 
 import model.Mower;
 
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 class MowerEngine {
@@ -19,8 +20,12 @@ class MowerEngine {
     }
 
     String start(String inputData) {
-        validator.validate(inputData, input -> input != null && !input.isEmpty() && input.matches(INPUT_FILE_PATTERN), INCONSISTENT_INPUT_DATA_ERROR_MESSAGE);
+        validator.validate(inputData, getValidationCondition(), INCONSISTENT_INPUT_DATA_ERROR_MESSAGE);
         return mowerBuilder.buildMowers(inputData).map(Mower::move).collect(Collectors.joining(LINE_BREAK));
 
+    }
+
+    private Predicate<String> getValidationCondition() {
+        return input -> input != null && !input.isEmpty() && input.matches(INPUT_FILE_PATTERN);
     }
 }
