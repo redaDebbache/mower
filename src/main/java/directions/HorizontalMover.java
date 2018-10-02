@@ -14,9 +14,4 @@ public class HorizontalMover implements Mover {
         Integer shiftingSign = mower.getShiftingSign();
         return new Position(max(0, min(currentPosition.getX() + shiftingSign, maxEdgesToReachPosition.getX())), currentPosition.getY());
     }
-
-
-
-
-
 }
