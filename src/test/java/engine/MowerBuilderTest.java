@@ -23,9 +23,9 @@ public class MowerBuilderTest {
         Position position = builder.buildPosition("3 5");
 
         //Then
-            assertThat(position).isNotNull();
-            assertThat(position.getX()).isEqualTo(3);
-            assertThat(position.getY()).isEqualTo(5);
+        assertThat(position).isNotNull();
+        assertThat(position.getX()).isEqualTo(3);
+        assertThat(position.getY()).isEqualTo(5);
 
     }
 
@@ -58,8 +58,34 @@ public class MowerBuilderTest {
                 "GAGAGAGAA\n");
         //Then
         assertThat(mower).isNotNull();
-        assertThat(mower).isEqualTo(new Mower(new Position(1, 2), Orientation.N, new Position(5, 5)));
-
+        assertThat(mower.getPosition()).isEqualTo(new Position(1, 2));
+        assertThat(mower.getOrientation()).isEqualTo(Orientation.N);
     }
 
+    @Test
+    public void should_return_empty_sream_data_is_empty() {
+        //Given
+        MowerBuilder builder = new MowerBuilder();
+        //When
+        Stream<String> commands = builder.devideDataIntoMowerCommands("");
+        //Then
+        assertThat(commands).isEmpty();
+    }
+
+    @Test
+    public void should_return_stream_of_mower_commands_and_positions() {
+        //Given
+        MowerBuilder builder = new MowerBuilder();
+        //When
+        List<String> commands = builder.devideDataIntoMowerCommands("1 2 N\n" +
+                "GAGAGAGAA\n" +
+                "3 3 E\n" +
+                "AADAADADDA").collect(Collectors.toList());
+        //Then
+        assertThat(commands.size()).isEqualTo(2);
+        assertThat(commands.get(0)).isEqualTo("1 2 N\n" +
+                "GAGAGAGAA\n");
+        assertThat(commands.get(1)).isEqualTo("3 3 E\n" +
+                "AADAADADDA");
+    }
 }

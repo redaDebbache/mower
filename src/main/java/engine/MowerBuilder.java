@@ -29,14 +29,18 @@ class MowerBuilder {
 
     Stream<Mower> buildMowers(String data) {
         Position farthestPosition = buildPosition(data.substring(BEGIN_INDEX, END_POSITION_INDEX));
-        Scanner scanner = new Scanner(data);
-        Pattern pattern = Pattern.compile(MOWER_DATA_PATTERN);
 
-        return scanner.findAll(pattern)
-                .map(matcher -> matcher.group(GROUP))
-                .filter(Objects::nonNull)
+        return devideDataIntoMowerCommands(data)
                 .map(group -> buildSingleMower(farthestPosition, group));
 
+    }
+
+     Stream<String> devideDataIntoMowerCommands(String data){
+        Scanner scanner = new Scanner(data);
+        Pattern pattern = Pattern.compile(MOWER_DATA_PATTERN);
+       return scanner.findAll(pattern)
+                .map(matcher -> matcher.group(GROUP))
+                .filter(Objects::nonNull);
     }
 
       Mower buildSingleMower(Position farthestPosition, String datas) {
