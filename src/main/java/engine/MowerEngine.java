@@ -21,7 +21,9 @@ class MowerEngine {
 
     String start(String inputData) {
         validator.validate(inputData, getValidationCondition(), INCONSISTENT_INPUT_DATA_ERROR_MESSAGE);
-        return mowerBuilder.buildMowers(inputData).map(Mower::move).collect(Collectors.joining(LINE_BREAK));
+        return mowerBuilder.buildMowers(inputData)
+                .map(Mower::move)
+                .collect(Collectors.joining(LINE_BREAK));
 
     }
 
