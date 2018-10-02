@@ -13,9 +13,9 @@ class MowerEngine {
     private InputDataValidator validator;
     private MowerBuilder mowerBuilder;
 
-    MowerEngine() {
-        mowerBuilder = new MowerBuilder();
-        validator = new InputDataValidator();
+    public MowerEngine(InputDataValidator validator, MowerBuilder mowerBuilder) {
+        this.validator = validator;
+        this.mowerBuilder = mowerBuilder;
     }
 
     String start(String inputData) {

@@ -52,7 +52,6 @@ public class Mower {
     }
 
     public String move(){
-     //   commands.forEach(command -> command.getDirectionManager().move(this));
         String logs = commands.stream().map(command -> command.getDirectionManager().move(this))
                 .map(Object::toString)
                 .collect(Collectors.joining(SPACE));
