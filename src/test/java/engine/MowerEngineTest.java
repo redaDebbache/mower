@@ -26,11 +26,11 @@ public class MowerEngineTest {
     
     @Test
     public void should_throw_exception_on_inconsistent_input_data() {
-        //Given engine property
-       
+        //Given
+        String inputData = "eeeeeeeee";
         try {
             //When
-            engine.start("eeeeeeeee");
+            engine.start(inputData);
         } catch (RuntimeException ex) {
             //Then
             assertThat(ex).isInstanceOf(InvalidInputDataException.class);
@@ -41,11 +41,11 @@ public class MowerEngineTest {
 
     @Test
     public void should_throw_exception_input_data_is_null() {
-        //Given engine property engine property
-       
+        //Given
+        String inputData = null;
         try {
             //When
-            engine.start(null);
+            engine.start(inputData);
         } catch (RuntimeException ex) {
             //Then
             assertThat(ex).isInstanceOf(InvalidInputDataException.class);
@@ -56,14 +56,15 @@ public class MowerEngineTest {
 
     @Test
     public void should_work_perfectly() {
-        //Given engine property
-       
-        //When
-        String logs = engine.start("5 5\n" +
+        //Given
+        String inputData = "5 5\n" +
                 "1 2 N\n" +
                 "GAGAGAGAA\n" +
                 "3 3 E\n" +
-                "AADAADADDA");
+                "AADAADADDA";
+
+        //When
+        String logs = engine.start(inputData);
         //Then
         verify(validator).validate(anyString(), any(Predicate.class), anyString());
         verify(builder).buildMowers(anyString());
