@@ -19,7 +19,7 @@ class MowerEngine {
         this.mowerBuilder = mowerBuilder;
     }
 
-    String start(String inputData) {
+    public String start(String inputData) {
         validator.validate(inputData, getValidationCondition(), INCONSISTENT_INPUT_DATA_ERROR_MESSAGE);
         return mowerBuilder.buildMowers(inputData)
                 .map(Mower::move)
