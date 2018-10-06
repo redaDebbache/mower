@@ -32,7 +32,6 @@ class MowerBuilder {
 
         return devideDataIntoMowerCommands(data)
                 .map(group -> buildSingleMower(farthestPosition, group));
-
     }
 
      Stream<String> devideDataIntoMowerCommands(String data){
